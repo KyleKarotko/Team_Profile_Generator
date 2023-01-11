@@ -28,12 +28,38 @@ const askManager = () => {
             name: "officeNumber",
             message: "Enter Employee office number",
         },
+      
     ]).then(answers => {
         const manager = new Manager (answers.name, answers.id, answers.email, answers.officeNumber)
         team.push(manager)
-        mainMenu()
+        updateRoster()
     })
 }
+const updateRoster = () => {
+    inquirer.prompt ([
+        {
+            
+                type: "list",
+                name: "roster",
+                message: "What type of employee would you like to add?",
+                choices: ['intern', 'engineer', 'Roster Complete']
+            
+        },
+    ])
+    .then((response) => {
+        if (response.roster === 'intern') {
+            askIntern();
+        }
+        if (response.roster === 'engineer') {
+            askEngineer();
+        }
+        if (response.roster === 'Roster Complete') {
+            writeFile(team);
+        }
+    }
+    )
+}
+
 const askEngineer = () => {
     inquirer.prompt ([
         {
@@ -56,7 +82,11 @@ const askEngineer = () => {
             name: "gitHub",
             message: "Enter Employee github",
         },
-    ])
+    ]) .then(answers => {
+        const engineer = new Engineer (answers.name, answers.id, answers.email, answers.officeNumber)
+        team.push(engineer)
+        updateRoster()
+    })
 }
 const askIntern = () => {
     inquirer.prompt ([
@@ -80,7 +110,17 @@ const askIntern = () => {
             name: "school",
             message: "Enter Employee school",
         },
-    ])
+        {
+            type: "list",
+            name: "roster",
+            message: "What type of employee would you like to add?",
+            choices: ['intern', 'engineer', 'Roster Complete']
+        },
+    ]) .then(answers => {
+        const intern = new Intern (answers.name, answers.id, answers.email, answers.officeNumber)
+        team.push(intern)
+        updateRoster()
+    })
 }
 
-mainMenu()
+askManager()
