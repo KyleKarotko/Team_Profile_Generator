@@ -3,6 +3,7 @@ const Manager = require('./lib/Manager')
 const Intern = require('./lib/Intern')
 const Engineer = require('./lib/Engineer')
 const team = []
+const createHTML = require('./src/createHTML')
 
 // function to ask manager info
 const askManager = () => {
@@ -47,16 +48,16 @@ const updateRoster = () => {
         },
     ])
     // if intern selected, prompt intern questions
-    .then((response) => {
-        if (response.roster === 'intern') {
+    .then((answers) => {
+        if (answers.roster === 'intern') {
             askIntern();
         }
     // if engineer selected, prompt engineer questions
-        if (response.roster === 'engineer') {
+        if (answers.roster === 'engineer') {
             askEngineer();
         }
     // if Roster complete selected, write file
-        if (response.roster === 'Roster Complete') {
+        if (answers.roster === 'Roster Complete') {
             writeFile(team);
         }
     }
@@ -122,6 +123,13 @@ const askIntern = () => {
         updateRoster()
     })
 }
+
+function writeFile(answers) {
+    fs.writeFile(`index.html`, createHTML(answers),(err) =>
+    err ? console.log(err) : console.log('Roster generated.')
+    )
+   
+};
 
 function init () {
 askManager()
