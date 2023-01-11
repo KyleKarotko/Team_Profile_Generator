@@ -5,7 +5,7 @@ const team = []
 const mainMenu = () => {
 
 }
-
+// function to ask manager info
 const askManager = () => {
     inquirer.prompt ([
         {
@@ -35,6 +35,7 @@ const askManager = () => {
         updateRoster()
     })
 }
+// function to ask if there are more employees to add to the roster
 const updateRoster = () => {
     inquirer.prompt ([
         {
@@ -46,13 +47,16 @@ const updateRoster = () => {
             
         },
     ])
+    // if intern selected, prompt intern questions
     .then((response) => {
         if (response.roster === 'intern') {
             askIntern();
         }
+    // if engineer selected, prompt engineer questions
         if (response.roster === 'engineer') {
             askEngineer();
         }
+    // if Roster complete selected, write file
         if (response.roster === 'Roster Complete') {
             writeFile(team);
         }
@@ -60,6 +64,7 @@ const updateRoster = () => {
     )
 }
 
+// function to ask engineer questions
 const askEngineer = () => {
     inquirer.prompt ([
         {
@@ -83,11 +88,12 @@ const askEngineer = () => {
             message: "Enter Employee github",
         },
     ]) .then(answers => {
-        const engineer = new Engineer (answers.name, answers.id, answers.email, answers.officeNumber)
+        const engineer = new Engineer (answers.name, answers.id, answers.email, answers.gitHub)
         team.push(engineer)
         updateRoster()
     })
 }
+// function to ask intern questions
 const askIntern = () => {
     inquirer.prompt ([
         {
@@ -110,17 +116,16 @@ const askIntern = () => {
             name: "school",
             message: "Enter Employee school",
         },
-        {
-            type: "list",
-            name: "roster",
-            message: "What type of employee would you like to add?",
-            choices: ['intern', 'engineer', 'Roster Complete']
-        },
+      
     ]) .then(answers => {
-        const intern = new Intern (answers.name, answers.id, answers.email, answers.officeNumber)
+        const intern = new Intern (answers.name, answers.id, answers.email, answers.school)
         team.push(intern)
         updateRoster()
     })
 }
 
+function init () {
 askManager()
+}
+
+init();
