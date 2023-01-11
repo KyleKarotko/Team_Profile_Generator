@@ -1,10 +1,9 @@
 const inquirer = require('inquirer')
 const Manager = require('./lib/Manager')
+const Intern = require('./lib/Intern')
+const Engineer = require('./lib/Engineer')
 const team = []
 
-const mainMenu = () => {
-
-}
 // function to ask manager info
 const askManager = () => {
     inquirer.prompt ([
