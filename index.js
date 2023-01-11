@@ -4,7 +4,7 @@ const Intern = require('./lib/Intern')
 const Engineer = require('./lib/Engineer')
 const team = []
 const createHTML = require('./src/createHTML')
-
+const fs = require("fs");
 // function to ask manager info
 const askManager = () => {
     inquirer.prompt ([
