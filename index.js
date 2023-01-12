@@ -5,6 +5,8 @@ const Engineer = require('./lib/Engineer')
 const team = []
 const createHTML = require('./src/createHTML')
 const fs = require("fs");
+
+
 // function to ask manager info
 const askManager = () => {
     inquirer.prompt ([
@@ -131,6 +133,7 @@ function writeFile(answers) {
    
 };
 
+// function to start the application
 function init () {
 askManager()
 }
