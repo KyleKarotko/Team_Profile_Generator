@@ -31,7 +31,7 @@ The following images show the webpage's apperance
 # Links
 
 ## Link to a video demo 
-https://drive.google.com/file/d/1huZ1r3xqK3udQxBwns13IHQSC1pVsZ_P/view
+https://drive.google.com/file/d/1DaJhNibwM9fe3GEe3k-2dOfEmMgrcN1E/view
 ## End project
 https://kylekarotko.github.io/Team_Profile_Generator/
 ## Github Repo
